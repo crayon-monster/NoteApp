@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_note_item"
+    android:elevation="4dp"
+    android:layout_marginBottom="16dp"
+    android:paddingStart="16dp">
+
+    <TextView
+        android:id="@+id/textView_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:maxLength="30"
+        android:text="Title Title Title Title"
+        android:textColor="?colorOnPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="@id/textView_title"
+        app:layout_constraintStart_toStartOf="@id/textView_title"
+        app:layout_constraintTop_toBottomOf="@id/textView_title" />
+
+    <TextView
+        android:id="@+id/textView_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/montserrat_regular"
+        android:lineSpacingMultiplier="1.5"
+        android:maxEms="12"
+        android:maxLines="3"
+        android:text="Lorem ipsum apsum dipsum upsum ipsum apsum dipsum upsum ipsum apsum \ndipsum upsum ipsum apsum dipsum upsum ipsum apsum dipsum upsum ipsum apsum \ndipsum upsum"
+        android:textColor="?colorOnPrimary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/textView_title"
+        app:layout_constraintTop_toBottomOf="@id/textView_title"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <TextView
+        android:id="@+id/textView_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="12dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="28 Nov, 2020 10:20 AM"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/textView_description"
+        app:layout_constraintTop_toBottomOf="@+id/textView_description" />
+
+    <ImageButton
+        android:id="@+id/button_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_baseline_delete_24"
+        android:backgroundTint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@id/textView_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toEndOf="@id/textView_date"
+        app:layout_constraintTop_toTopOf="@id/textView_date" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
