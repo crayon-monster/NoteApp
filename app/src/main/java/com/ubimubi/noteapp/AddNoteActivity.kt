@@ -3,6 +3,7 @@ package com.ubimubi.noteapp
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import com.ubimubi.noteapp.local.Note
 
 class AddNoteActivity : AppCompatActivity() {
 
@@ -11,6 +12,9 @@ class AddNoteActivity : AppCompatActivity() {
         setContentView(R.layout.activity_addnote)
 
         val backButton = findViewById<ImageButton>(R.id.button_back)
+
+        val note = Note("Title", "Note")
+        println(note.title)
 
         // Set click listeners
         backButton.setOnClickListener { finish() }
