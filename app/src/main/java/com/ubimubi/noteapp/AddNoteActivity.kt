@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
 import java.util.*
@@ -14,6 +15,7 @@ import java.util.*
 class AddNoteActivity : AppCompatActivity() {
     private lateinit var editTextTitle: EditText
     private lateinit var editTextDescription: EditText
+    private lateinit var textViewDate: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +25,9 @@ class AddNoteActivity : AppCompatActivity() {
 
         editTextTitle = findViewById(R.id.editText_title)
         editTextDescription = findViewById(R.id.editText_description)
+        textViewDate = findViewById(R.id.textView_date)
+
+        textViewDate.text = getCurrentDate()
 
         // Set click listeners
         backButton.setOnClickListener {
@@ -31,15 +36,16 @@ class AddNoteActivity : AppCompatActivity() {
     }
 
     private fun saveData() {
+        val noteTitle = editTextTitle.text.trim()
+        val noteDescription = editTextDescription.text.trim()
+
         val replyIntent = Intent()
-        if (TextUtils.isEmpty(editTextTitle.text.trim()) || TextUtils.isEmpty(
-                editTextDescription.text.trim()
-            )
+        if (TextUtils.isEmpty(noteTitle) and TextUtils.isEmpty(noteDescription)
         ) {
             setResult(Activity.RESULT_CANCELED, replyIntent)
         } else {
-            replyIntent.putExtra("EXTRA_TITLE", editTextTitle.toString())
-            replyIntent.putExtra("EXTRA_DESCRIPTION", editTextDescription.toString())
+            replyIntent.putExtra("EXTRA_TITLE", noteTitle.toString())
+            replyIntent.putExtra("EXTRA_DESCRIPTION", noteDescription.toString())
             replyIntent.putExtra("EXTRA_DATE", getCurrentDate())
             setResult(Activity.RESULT_OK, replyIntent)
         }

@@ -1,31 +1,42 @@
 package com.ubimubi.noteapp.local
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class NoteViewModel(private val repository: NoteRepository) : ViewModel() {
+class NoteViewModel(application: Application) : AndroidViewModel(application) {
+    private val repository: NoteRepository =
+        NoteRepository(NoteDatabase.getDatabase(application).noteDao())
 
-    val allNotes: LiveData<List<Note>> = repository.allNotes
+    private val _allNotes = MutableLiveData<List<Note>>()
+    val allNotes: LiveData<List<Note>>
+        get() = _allNotes
 
-    fun insert(note: Note) = viewModelScope.launch { repository.insert(note) }
+    fun insert(note: Note) = viewModelScope.launch(Dispatchers.IO) { repository.insert(note) }
 
-    fun update(note: Note) = viewModelScope.launch { repository.update(note) }
+    fun update(note: Note) = viewModelScope.launch(Dispatchers.IO) { repository.update(note) }
 
-    fun delete(note: Note) = viewModelScope.launch { repository.delete(note) }
+    fun delete(note: Note) = viewModelScope.launch(Dispatchers.IO) { repository.delete(note) }
 
-    fun getNotes() = viewModelScope.launch { allNotes }
-
-}
-
-class NoteViewModelFactory(private val repository: NoteRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(NoteViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return NoteViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
+    fun getNotes() = viewModelScope.launch(Dispatchers.IO) {
+        val data = repository.getNotes()
+        withContext(Dispatchers.Main) { _allNotes.value = data }
     }
+
+
 }
+//
+//class NoteViewModelFactory(private val repository: NoteRepository) : ViewModelProvider.Factory {
+//    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+//        if (modelClass.isAssignableFrom(NoteViewModel::class.java)) {
+//            @Suppress("UNCHECKED_CAST")
+//            return NoteViewModel(repository) as T
+//        }
+//        throw IllegalArgumentException("Unknown ViewModel class")
+//    }
+//}

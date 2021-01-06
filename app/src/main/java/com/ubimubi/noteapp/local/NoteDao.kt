@@ -1,6 +1,5 @@
 package com.ubimubi.noteapp.local
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -16,6 +15,6 @@ interface NoteDao {
     fun deleteNote(note: Note)
 
     @Query("SELECT * FROM note_table")
-    fun getAllNotes(): LiveData<List<Note>>
+    fun getAllNotes(): List<Note>
 
 }

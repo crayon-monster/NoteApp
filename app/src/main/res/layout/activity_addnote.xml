@@ -22,13 +22,14 @@
 
         <EditText
             android:id="@+id/editText_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:maxLines="1"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/montserrat_regular"
             android:hint="Title"
-            android:maxLength="30"
+            android:maxLength="20"
             android:textColorHint="@color/gray"
             android:textColor="@color/white"
             android:textSize="20sp"

@@ -11,18 +11,16 @@
     // Custom colors
     <color name="steel_blue">#1280C4</color>
     <color name="blue">#005493</color>
-
+    <color name="cursor_blue">#1D3B68</color>
     <color name="dark_blue">#8F163A55</color>
     <color name="black_blue">#97152730</color>
-
-
     <color name="lavender">#e6ebf0</color>
-
     <color name="black_lavender">#333F4A</color>
-
-
     <color name="gray">#D07E7F81</color>
-
     <color name="dark_gray">#2C2C2C</color>
+
+    // Other colors
+    <color name="green">#AF2C7750</color>
+
 
 </resources>

@@ -1,11 +1,8 @@
 package com.ubimubi.noteapp.local
 
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
 
 class NoteRepository(private val noteDao: NoteDao) {
-
-    val allNotes: LiveData<List<Note>> = noteDao.getAllNotes()
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
@@ -21,6 +18,6 @@ class NoteRepository(private val noteDao: NoteDao) {
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun getNotes() = allNotes
+    suspend fun getNotes() = noteDao.getAllNotes()
 
 }
