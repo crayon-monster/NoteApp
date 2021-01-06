@@ -11,9 +11,12 @@ data class Note(
     var title: String?,
 
     @ColumnInfo(name = "description")
-    var description: String?
+    var description: String?,
+
+    var date: String?
+
 ) {
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0
+    var id: Int = 0
 
 }

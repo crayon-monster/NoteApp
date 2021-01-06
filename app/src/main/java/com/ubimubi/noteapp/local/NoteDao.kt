@@ -17,4 +17,5 @@ interface NoteDao {
 
     @Query("SELECT * FROM note_table")
     fun getAllNotes(): LiveData<List<Note>>
+
 }
