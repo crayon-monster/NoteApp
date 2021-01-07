@@ -30,16 +30,9 @@ class MainActivity : AppCompatActivity() {
             noteAdapter.submitList(it)
             noteAdapter.notifyDataSetChanged()
         })
-        initActivity()
-
 
         initDeleteListener()
         initRecyclerView()
-        initSwipe()
-    }
-
-    private fun initActivity() {
-
     }
 
     override fun onStart() {
@@ -55,28 +48,38 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            val title: String? = data?.getStringExtra("EXTRA_TITLE")
-            val description: String? = data?.getStringExtra("EXTRA_DESCRIPTION")
-            val date: String? = data?.getStringExtra("EXTRA_DATE")
+        val title: String? = data?.getStringExtra("EXTRA_TITLE")
+        val description: String? = data?.getStringExtra("EXTRA_DESCRIPTION")
+        val date: String? = data?.getStringExtra("EXTRA_DATE")
+        val id: Int = data?.getIntExtra("EXTRA_ID", -1) ?: -1
 
-            val note = Note(title, description, date)
+        val note = Note(title, description, date)
+
+        if (requestCode == 1 && resultCode == RESULT_OK) {
             noteViewModel.insert(note)
+        }
+        if (requestCode == 2 && resultCode == RESULT_OK) {
+            note.id = id
+            noteViewModel.update(note)
         }
     }
 
     private fun initDeleteListener() {
-        noteAdapter = NoteAdapter { note ->
+        noteAdapter = NoteAdapter({ pos ->
             val tempList = arrayListOf<Note>()
-            tempList.addAll(noteAdapter.notes)
-            val pos = tempList.indexOf(note)
-            tempList.remove(note)
+            tempList.addAll(noteAdapter.currentList)
+            val deleteNote = tempList[pos]
+            tempList.removeAt(pos)
 
             noteAdapter.submitList(tempList)
-            noteAdapter.notifyItemRemoved(pos)
+            noteAdapter.notifyDataSetChanged()
 
-            noteViewModel.delete(note)
-        }
+            noteViewModel.delete(deleteNote)
+        }, { note ->
+            val intent = Intent(this, AddNoteActivity::class.java)
+            intent.putExtra("NOTE_EXTRA", note.toParcelableNote())
+            startActivityForResult(intent, 2)
+        })
     }
 
 
@@ -103,10 +106,10 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
                     val pos = viewHolder.adapterPosition
-                    val note: Note = noteAdapter.notes[pos]
+                    val note: Note = noteAdapter.currentList[pos]
 
                     val tempList = arrayListOf<Note>()
-                    tempList.addAll(noteAdapter.notes)
+                    tempList.addAll(noteAdapter.currentList)
                     tempList.removeAt(pos)
 
                     noteAdapter.submitList(tempList)

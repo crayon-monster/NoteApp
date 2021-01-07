@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.ubimubi.noteapp.local.ParcelableNote
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -16,6 +17,7 @@ class AddNoteActivity : AppCompatActivity() {
     private lateinit var editTextTitle: EditText
     private lateinit var editTextDescription: EditText
     private lateinit var textViewDate: TextView
+    private var id = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +35,17 @@ class AddNoteActivity : AppCompatActivity() {
         backButton.setOnClickListener {
             saveData()
         }
+
+        handleExtraData()
+    }
+
+    private fun handleExtraData() {
+        intent.getParcelableExtra<ParcelableNote>("NOTE_EXTRA")?.let {
+            editTextTitle.setText(it.title)
+            editTextDescription.setText(it.description)
+            textViewDate.text = it.date
+            this.id = it.id
+        }
     }
 
     private fun saveData() {
@@ -47,6 +60,7 @@ class AddNoteActivity : AppCompatActivity() {
             replyIntent.putExtra("EXTRA_TITLE", noteTitle.toString())
             replyIntent.putExtra("EXTRA_DESCRIPTION", noteDescription.toString())
             replyIntent.putExtra("EXTRA_DATE", getCurrentDate())
+            replyIntent.putExtra("EXTRA_ID", id)
             setResult(Activity.RESULT_OK, replyIntent)
         }
         finish()
