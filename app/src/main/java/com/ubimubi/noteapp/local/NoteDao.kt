@@ -1,6 +1,7 @@
 package com.ubimubi.noteapp.local
 
 import androidx.room.*
+import com.ubimubi.noteapp.models.entity.Note
 
 @Dao
 interface NoteDao {

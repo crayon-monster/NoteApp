@@ -1,4 +1,4 @@
-package com.ubimubi.noteapp.local
+package com.ubimubi.noteapp.models.entity
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo

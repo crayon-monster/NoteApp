@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ubimubi.noteapp.local.Note
+import com.ubimubi.noteapp.models.entity.Note
 
 
 class NoteAdapter(

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Note App</string>
     <string name="notes">Notes</string>
+    <string name="title">Title</string>
+    <string name="save_and_go_back">Save and go back</string>
+    <string name="date">28 Nov, 2020 10:20 AM</string>
+    <string name="delete_note">Delete note</string>
+    <string name="lorem_ipsum">Lorem ipsum apsum dipsum upsum ipsum apsum dipsum upsum ipsum apsum dipsum upsum ipsum apsum dipsum upsum ipsum apsum dipsum upsum ipsum apsum dipsum upsum</string>
 </resources>

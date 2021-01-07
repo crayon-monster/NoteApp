@@ -1,4 +1,4 @@
-package com.ubimubi.noteapp
+package com.ubimubi.noteapp.ui.activities.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,9 +9,12 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.ubimubi.noteapp.local.Note
-import com.ubimubi.noteapp.local.NoteViewModel
-
+import com.ubimubi.noteapp.NoteAdapter
+import com.ubimubi.noteapp.R
+import com.ubimubi.noteapp.models.entity.Note
+import com.ubimubi.noteapp.toParcelableNote
+import com.ubimubi.noteapp.ui.activities.addnote.AddNoteActivity
+import com.ubimubi.noteapp.viewmodels.NoteViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerViewNotes: RecyclerView
@@ -26,18 +29,23 @@ class MainActivity : AppCompatActivity() {
         //setClickListeners()
         setClickListeners()
 
+        noteViewModel.getNotes()
         noteViewModel.allNotes.observe(this, {
             noteAdapter.submitList(it)
             noteAdapter.notifyDataSetChanged()
         })
 
-        initDeleteListener()
+        initClickListeners()
         initRecyclerView()
     }
 
     override fun onStart() {
         super.onStart()
-        noteViewModel.getNotes()
+        initActivity()
+    }
+
+    fun initActivity() {
+
     }
 
     private fun setClickListeners() {
@@ -57,14 +65,17 @@ class MainActivity : AppCompatActivity() {
 
         if (requestCode == 1 && resultCode == RESULT_OK) {
             noteViewModel.insert(note)
+            noteViewModel.getNotes()
         }
         if (requestCode == 2 && resultCode == RESULT_OK) {
             note.id = id
             noteViewModel.update(note)
+            noteViewModel.getNotes()
         }
+        noteAdapter.notifyDataSetChanged()
     }
 
-    private fun initDeleteListener() {
+    private fun initClickListeners() {
         noteAdapter = NoteAdapter({ pos ->
             val tempList = arrayListOf<Note>()
             tempList.addAll(noteAdapter.currentList)

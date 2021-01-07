@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NoteApp">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".ui.activities.main.MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,8 +19,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddNoteActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".ui.activities.addnote.AddNoteActivity"
+            android:parentActivityName=".ui.activities.main.MainActivity" />
     </application>
 
 </manifest>

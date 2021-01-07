@@ -1,4 +1,4 @@
-package com.ubimubi.noteapp
+package com.ubimubi.noteapp.ui.activities.addnote
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -9,7 +9,8 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.ubimubi.noteapp.local.ParcelableNote
+import com.ubimubi.noteapp.R
+import com.ubimubi.noteapp.models.entity.ParcelableNote
 import java.text.SimpleDateFormat
 import java.util.*
 

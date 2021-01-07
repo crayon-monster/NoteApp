@@ -1,10 +1,13 @@
-package com.ubimubi.noteapp.local
+package com.ubimubi.noteapp.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.ubimubi.noteapp.local.NoteDatabase
+import com.ubimubi.noteapp.models.entity.Note
+import com.ubimubi.noteapp.repositories.NoteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -13,7 +16,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: NoteRepository =
         NoteRepository(NoteDatabase.getDatabase(application).noteDao())
 
-    private val _allNotes = MutableLiveData<List<Note>>()
+    private var _allNotes = MutableLiveData<List<Note>>()
     val allNotes: LiveData<List<Note>>
         get() = _allNotes
 

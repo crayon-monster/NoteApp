@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -18,22 +19,25 @@
             android:id="@+id/button_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_baseline_arrow_back_24" />
+            android:background="@drawable/ic_baseline_arrow_back_24"
+            android:contentDescription="@string/save_and_go_back" />
 
         <EditText
             android:id="@+id/editText_title"
             android:layout_width="match_parent"
             android:maxLines="1"
+            android:inputType="text"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/montserrat_regular"
-            android:hint="Title"
-            android:maxLength="20"
-            android:textColorHint="@color/gray"
+            android:hint="@string/title"
+            android:maxLength="50"
+            android:textColorHint="#9EE6EBF0"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:autofillHints="Title" />
 
     </com.google.android.material.appbar.MaterialToolbar>
 
@@ -52,13 +56,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        android:autofillHints="Description"
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/textView_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="28 Nov, 2020 10:20 AM"
+        android:text="@string/date"
         android:textColor="@color/gray"
         app:layout_constraintBottom_toBottomOf="@id/editText_description"
         app:layout_constraintStart_toStartOf="@id/editText_description" />
