@@ -1,4 +1,4 @@
-package com.ubimubi.noteapp
+package com.ubimubi.noteapp.ui.activities.main
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.ubimubi.noteapp.R
 import com.ubimubi.noteapp.models.entity.Note
 
 

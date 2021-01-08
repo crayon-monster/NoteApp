@@ -5,11 +5,8 @@ import android.os.Bundle
 import android.widget.ImageButton
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.ubimubi.noteapp.NoteAdapter
 import com.ubimubi.noteapp.R
 import com.ubimubi.noteapp.models.entity.Note
 import com.ubimubi.noteapp.toParcelableNote
@@ -30,22 +27,16 @@ class MainActivity : AppCompatActivity() {
         setClickListeners()
 
         noteViewModel.getNotes()
-        noteViewModel.allNotes.observe(this, {
-            noteAdapter.submitList(it)
-            noteAdapter.notifyDataSetChanged()
-        })
-
+        initActivity()
         initClickListeners()
         initRecyclerView()
     }
 
-    override fun onStart() {
-        super.onStart()
-        initActivity()
-    }
-
-    fun initActivity() {
-
+    private fun initActivity() {
+        noteViewModel.allNotes.observe(this, {
+            noteAdapter.submitList(it)
+            noteAdapter.notifyDataSetChanged()
+        })
     }
 
     private fun setClickListeners() {
@@ -80,12 +71,13 @@ class MainActivity : AppCompatActivity() {
             val tempList = arrayListOf<Note>()
             tempList.addAll(noteAdapter.currentList)
             val deleteNote = tempList[pos]
+
             tempList.removeAt(pos)
+            noteViewModel.delete(deleteNote)
 
             noteAdapter.submitList(tempList)
             noteAdapter.notifyDataSetChanged()
 
-            noteViewModel.delete(deleteNote)
         }, { note ->
             val intent = Intent(this, AddNoteActivity::class.java)
             intent.putExtra("NOTE_EXTRA", note.toParcelableNote())
@@ -106,35 +98,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun initSwipe() {
-        val mIth = ItemTouchHelper(
-            object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-                override fun onMove(
-                    recyclerView: RecyclerView,
-                    viewHolder: ViewHolder,
-                    target: ViewHolder
-                ): Boolean = false
-
-                override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
-                    val pos = viewHolder.adapterPosition
-                    val note: Note = noteAdapter.currentList[pos]
-
-                    val tempList = arrayListOf<Note>()
-                    tempList.addAll(noteAdapter.currentList)
-                    tempList.removeAt(pos)
-
-                    noteAdapter.submitList(tempList)
-                    noteAdapter.notifyItemRemoved(pos)
-
-                    noteViewModel.delete(note)
-                }
-            })
-        mIth.attachToRecyclerView(recyclerViewNotes)
-
-    }
-
     private fun toAddTodoActivity() {
         val intent = Intent(this, AddNoteActivity::class.java)
         startActivityForResult(intent, 1)
     }
+
 }
