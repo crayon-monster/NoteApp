@@ -29,6 +29,7 @@ class AddNoteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addnote)
+        setSupportActionBar(findViewById(R.id.toolbar))
 
         val backButton = findViewById<ImageButton>(R.id.button_back)
 

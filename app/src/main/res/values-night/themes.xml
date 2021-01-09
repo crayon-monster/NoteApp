@@ -6,11 +6,13 @@
         <item name="colorPrimaryVariant">@color/black_blue</item>
         <item name="colorOnPrimary">@color/lavender</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/lavender</item>
+        <item name="colorSecondary">@color/black_blue</item>
         <item name="colorSecondaryVariant">@color/black_blue</item>
         <item name="colorOnSecondary">@color/dark_blue</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:textColorPrimary">@color/lavender</item>
+        <item name="android:colorBackground">@color/lighter_dark_blue</item>
     </style>
 </resources>
