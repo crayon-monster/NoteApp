@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Note App</string>
+    <string name="app_name">Simple Notes</string>
     <string name="notes">Notes</string>
     <string name="title">Title</string>
     <string name="save_and_go_back">Save and go back</string>
